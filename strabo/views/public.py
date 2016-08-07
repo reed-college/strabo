@@ -31,7 +31,7 @@ def map_post():
   ip = db.session.query(schema.InterestPoints).get(int(ip_id))
 
   images = ip.images
-  images.sort(key=lambda img: img.taken_at)
+  images.sort(key=lambda img: img.ip_order_idx)
 
   filenames = [{"filename":img.filename,
                 "description":img.description,

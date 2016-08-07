@@ -35,6 +35,13 @@ def delete_image(id):
     idquery.delete()
     db.session.commit()
 
+
+def to_dictonary(sql_row):
+    return {col.name:getattr(sql_row,col.name) for col in sql_row.__class__.__table__.columns}
+
+def to_dict_list(table_data):
+    return [to_dictonary(row) for row in table_data]
+    
 #helper functions, currently unused
 '''
 def get_row_by_id(table,id):
