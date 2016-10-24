@@ -1,5 +1,5 @@
-Concepts
-========
+General Concepts
+================
 
 Descriptions of implementation concepts which span several files.
 
@@ -8,14 +8,12 @@ Descriptions of implementation concepts which span several files.
 Image Management
 ----------------
 
-When images are added to the database, only one filename is stored, the name of the
+When images are added to the database only one filename is stored, the name of the
 saved file in the ``static/uploads`` directory. No matter what filename of the uploaded
 file is, it will never overwrite a file in that directory. Instead it will
-generate a random string which it appends to the filename using :py:func:`strabo.file_writing.make_unique_filename`
-Only then is the file saved. Even though this file is
-never shown in the browser, it is still important as a reference image. If it is there, then the
-resized image files can be recreated by running generate_mobile_imgs.py, and everything should be
-good.
+generate a random string which it appends to the filename using :py:func:`strabo.file_writing.make_unique_filename`.
+Even though this file is never shown in the browser, it is still important as a reference image. If it is there, then the
+resized image files can be recreated by running generate_mobile_imgs.py.
 
 Image resizing
 ~~~~~~~~~~~~~~
@@ -25,16 +23,16 @@ automatically generated from the original file. They are generated during upload
 generate_mobile_imgs.py is run.
 
 The smaller of the two is stored in
-``static/thumbnails``, it's maximum dimensions are specified by the ``THUMBNAIL_MAX_SIZE``
-configuration property, and they are displayed in the popup's carousel, as well as in the admin
+``static/thumbnails``, and its maximum dimensions are specified by the ``THUMBNAIL_MAX_SIZE``
+configuration property. The smaller images are displayed in the popup carousel, as well as in the admin
 interface.
 
 The larger of the two is stored in
-``static/mobile_imgs``, their maximum dimensions are specified by the ``MOBILE_SERV_MAX_SIZE``
-configuration property, and they are displayed the photoswipe carousel.
+``static/mobile_imgs``. Their maximum dimensions are specified by the ``MOBILE_SERV_MAX_SIZE``
+configuration property, and they are displayed the Photoswipe carousel.
 
-Interest Point Display
-----------------------
+Interest Point Display ***Clarification needed***
+-------------------------------------------------
 
 How interest points move from the database to being displayed by the browser.
 
@@ -52,3 +50,9 @@ is assigned to a javascript variable in a jinja template (map.html and upload_ip
 
 Now, this list of geojson objects is converted into a Leaflet FeatureGroup,
 which many functions interact with to display the interest points.
+
+Authentication and Authorization
+--------------------------------
+
+Authentication and authorization for strabo was set up with the help of Reed's Computiner & Information Services (CIS). Access to the private end of strabo (the /admin web pages) require a Kerberos login and password. Only specific users can access the admin pages. Adding users to the list involves contacting CIS or adding username/password pairs to the remote server using an ssh key. 
+

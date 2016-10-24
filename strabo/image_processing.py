@@ -1,7 +1,8 @@
 '''
-Handles interaction with `PIL library <https://python-pillow.org/>`_, including thumbnail creation, dimention getting, and
+Handles interaction with `PIL library <https://python-pillow.org/>`_, including thumbnail creation, dimension getting, and
 image processing capabilities, including allowed file extensions.
 '''
+
 import os
 from PIL import Image
 
@@ -17,12 +18,12 @@ def allowed_file(filename):
 def save_shrunken_image(image_path,thumbnail_path,max_dim):
     '''
     Uses the Python Imaging Library to save a smaller image of the same scale but
-    with maximum dimentions specified by max_dim using the
-    `thumbnail method <http://pillow.readthedocs.io/en/3.3.x/reference/Image.html?highlight=thumbnail>`_
+    with maximum dimensions specified by max_dim using the
+    `thumbnail method <http://pillow.readthedocs.io/en/3.3.x/reference/Image.html?highlight=thumbnail>`_.
 
     :param string image_path: File path (including filename) of source image (must be a valid image file)
-    :param string thumbnail_path: File path (including filename) of location image will be saved.
-    :param max_dim: (width,height) tuple specifiying maximum dimentions for output image.
+    :param string thumbnail_path: File path (including filename) of location image will be saved
+    :param max_dim: (width,height) Tuple specifiying maximum dimensions for output image
     '''
     # import desired image from /uploads folder
     with Image.open(image_path) as img:
@@ -34,6 +35,6 @@ def save_shrunken_image(image_path,thumbnail_path,max_dim):
         img.save(thumbnail_path)
 
 def get_dimensions(filename):
-    '''Get dimentions of image with ``filename`` in ``static/uploads/`` folder.'''
-    with Image.open(os.path.join(straboconfig['UPLOAD_FOLDER'],filename)) as im:
-        return im.size#width, height tuple
+    '''Get dimensions of image with ``filename`` in ``static/uploads/`` folder.'''
+    with Image.open(os.path.join(straboconfig['UPLOAD_DIR'],filename)) as im:
+        return im.size #width, height tuple

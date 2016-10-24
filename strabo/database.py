@@ -1,8 +1,8 @@
 '''
-Currently only handles interest poing and image deletion.
+Currently handles interest point and image deletion.
 
 In future versions, this will handle all database interactions,
-including gets, sets, updates.
+including gets, sets, and updates. ***clarification needed*** Where are these interactions now
 '''
 
 import sqlalchemy
@@ -13,7 +13,7 @@ from strabo import file_writing
 from strabo import db
 
 def delete_ip(id):
-    '''Deletes ip refrenced by id.
+    '''Deletes ip referenced by id.
 
     All images associated with the ip are deleted!'''
     idquery = db.session.query(schema.InterestPoints).filter_by(id=id)
@@ -37,12 +37,12 @@ def delete_image(id):
 
 
 def delete_unreferenced_images(old_images,images):
-    '''deletes images in old_images which are not in images'''
+    '''Deletes images in old_images which are not in images ***clarification needed*** '''
     for old_img in old_images:
         if all(old_img.id != img.id for img in images):
             delete_image(old_img.id)
 
-
+# ***clarification needed*** what does this mean?
 def jsonifiable_row(sql_row):
     return {col.name:getattr(sql_row,col.name) for col in sql_row.__class__.__table__.columns}
 

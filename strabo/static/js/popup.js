@@ -5,7 +5,7 @@ var gallery;
 //list of image objects passed from post call in ip_clicked
 var imgs;
 
-//calculates thumbnail size from the full size image size passed in
+//calculates thumbnail size from the full size image size
 function get_shrunk_dim(img,max_dim){
     ratio = Math.min($("#carouselholder").width()/img.width,$("#carouselholder").height()/img.height);
     shrink_ratio = Math.min(ratio,1.0)
@@ -36,7 +36,6 @@ function add_carousel_entries(imgs){
         flkty.append($cellElems);
     });
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////
 //brings up popup associated with feature ip
 function ip_clicked(db_id) {
     //sends a request to the server to return the information associated with the
@@ -51,14 +50,10 @@ function ip_clicked(db_id) {
             if (data.images.length != 0){
                 //renders the popup
                 $('#popup').show();
-
                 remove_all_carousel_entries();
-
                 add_carousel_entries(imgs);
-
                 $("#ip_description").text(ip_descrip);
                 $("#ip_title").text(ip_title);
-
                 // resize after un-hiding Flickity
                 flkty.resize();
                 flkty.reposition();
@@ -66,8 +61,6 @@ function ip_clicked(db_id) {
         }
     );
 }
-//////////////////////////////////////////////////////////////////////////////////////////////
-
 function set_flickity_click(){
     /*
     Purpose:
@@ -75,7 +68,7 @@ function set_flickity_click(){
 
     Details:
     On android, there is problem where tapping on flickity cell makes photoswipe flash open for a
-    second, and close immidiately, making the photoswipe feature useless. Setting closeOnVerticalDrag to false
+    second, and close immediately, making the photoswipe feature useless. Setting closeOnVerticalDrag to false
     seems to help marginally, but does not fix the problem.
 
     I fixed the problem by adding a delay between when the cell is clicked to when photoswipe is opened.
@@ -85,9 +78,7 @@ function set_flickity_click(){
     */
     var timeout_seconds = 0.1;
     var SECS_PER_MILSEC = 1000;
-
     var photoswipe_fetched = false;
-
 
     flkty.on( 'staticClick', function( event, pointer, cellElement, cellIndex ) {
         if (cellElement && !photoswipe_fetched) {
@@ -99,7 +90,6 @@ function set_flickity_click(){
         }
     });
 }
-
 
 function make_photoswipe(pic_index){
     // execute above function
@@ -115,7 +105,7 @@ function make_photoswipe(pic_index){
         at http://photoswipe.com/documentation/responsive-images.html */
         mobile_dim = get_shrunk_dim(img,straboconfig['MOBILE_SERV_MAX_SIZE'])
         items.push({
-            src:straboconfig['MOBILE_IM_DIR_RELPATH'] + img.filename,
+            src:straboconfig['MOBILE_IMG_DIR_RELPATH'] + img.filename,
             w:mobile_dim.width,
             h:mobile_dim.height
         });
@@ -196,9 +186,7 @@ function flickity_init(){
     set_popup_close_button();
 }
 
-
-
-
+// Allows user to close popup when the ESC key is hit and when the mouse clicks outside of the popup space.
 $(document).keyup(function(e) {
     if (e.keyCode==27) { //if ESC key is hit
         $("#popup").hide();
@@ -207,7 +195,6 @@ $(document).keyup(function(e) {
         }
     }
 });
-
 $(document).mouseup(function(e){
         var popup = $("#popup");
         if (popup.is(e.target)){

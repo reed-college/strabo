@@ -1,10 +1,10 @@
 '''
-This file is here to help test strabo.
+This file can be used to test strabo.
 
 To use it, run add_database.py after the database has been initialized.
 
-It adds interest points and images to the database, so you can see if features are working
-without having to add ips and imgs yourself.
+It adds several mock interest points and images to the database, so you can see whether features 
+on the map are working.
 '''
 
 import shutil
@@ -21,16 +21,16 @@ from strabo import db, app,straboconfig
 def recreate_postgres_db():
     ''' Hackish and bad way of reinniting the postgres database
     by deleting the entire thing and starting over.
-    only use for development.'''
+    Only use for development.'''
     os.system("dropdb strabo")
-    #deletes all files in folder specified except hidden files and those with no file extension.
+    # Deletes all files in folder specified except hidden files and those with no file extension.
     os.system("rm strabo/static/uploads/*$.*")
     os.system("rm strabo/static/thumbnails/*$.*")
     os.system("createdb strabo")
     os.system("python initDB.py")
 
 # recreate_postgres_db()
-class mock_flask_file_obj:
+class mock_flask_file_obj: #***clarification needed***
     '''
     Mocks the flask object that is in request.files.
 

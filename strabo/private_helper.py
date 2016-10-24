@@ -1,6 +1,7 @@
 '''
-Assigns entries in the table according to text input from the admin interface.
+Assigns entries in the database table according to text input from the admin interface.
 '''
+
 import datetime
 import copy
 
@@ -14,7 +15,7 @@ from strabo import straboconfig
 
 def make_interest_point(form_ip_id,images,form_title,form_body,form_geo_obj,form_layer,form_style):
     '''
-    Creates interest point (or if form_ip_id is defined, gets old one from database), and fills it in
+    Creates interest point (or, if form_ip_id is defined, returns the old one from database), and fills it in
     with inputs from form.
 
     Deletes image files which are being replaced.
@@ -35,16 +36,17 @@ def make_interest_point(form_ip_id,images,form_title,form_body,form_geo_obj,form
 
 def make_date(form_year,form_month):
     '''
-    :param string form_year: Year value passed in from form. Is a string decimal
-        representation of a year or en empty string if that part of the form was
+    :param string form_year: Year value passed in from form. It is a string decimal
+        representation of a year or an empty string if that part of the form was
         left empty.
 
     :param string form_month: Month value, follows same format as year.
 
-    If month and year are valid values,returns a date with specied month and year.
+    If month and year are valid values, returns a date with the specified month and year.
 
     If not, then it uses today's date as a default.
     '''
+
     default_day = 1
     year = int(form_year) if form_year else datetime.date.today().year
     month = int(form_month) if form_month else datetime.date.today().month
@@ -57,7 +59,8 @@ def make_image(ip_idx,form_image_id,form_file,form_descrip,form_year,form_month)
 
     If a flask.files object (see `here <http://flask.pocoo.org/docs/0.11/patterns/fileuploads/>`_ for more information)
     is passed in, then it saves the new file and stores the new information in the database.
-    If the image row already stored information about an old image (i.e. the image was edited), then that old image is deleted.
+
+    If the image row already contains information about an old image (i.e. the image was edited), then that old image is deleted.
     '''
     image = db.session.query(schema.Images).get(form_image_id) if form_image_id != "" else schema.Images()
 
@@ -77,9 +80,9 @@ def make_image(ip_idx,form_image_id,form_file,form_descrip,form_year,form_month)
 
 def make_ordered_images(ids,files,descrips,years,months):
     '''
-    Takes in lists of form objects. Stores the index of the image from the form list into
+    Takes in lists of form objects. Stores the index of the image from the form list in
     schema.Images.ip_order_idx field as it goes
-    through so the database remembers the order in the form.
+    through so the database remembers the order in the form. ***clarification needed*** clarify that sentence
 
     Deletes replaced image files.
     '''
@@ -90,7 +93,7 @@ def make_ordered_images(ids,files,descrips,years,months):
 
 def get_ordered_images(interest_point):
     '''
-    Returns a list of images in the order they were submitted in on the upload form.
+    Returns a list of images in the order they were submitted from the upload form.
     '''
     ord_imgs = copy.copy(interest_point.images)
     ord_imgs.sort(key=lambda img: img.ip_order_idx)

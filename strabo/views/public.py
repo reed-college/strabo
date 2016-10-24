@@ -1,8 +1,8 @@
 '''
-This file handles all communication with the map, including page loading, sending image
+This file handles all communication with the map, including page loading and sending image
 information when interest points are clicked.
 
-Also renders the about page.
+It also renders the About page.
 '''
 from flask import request, render_template, jsonify
 from strabo import database
@@ -26,7 +26,9 @@ def map():
      **straboconfig)
 
 @app.route('/map/post', methods=["POST"])
+
 def map_post():
+  '''Can you clarify for me what exactly this function does  ***clarification needed*** '''
   # get the ip_value user has clicked
   ip_id = request.form['db_id']
   ip = db.session.query(schema.InterestPoints).get(int(ip_id))

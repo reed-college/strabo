@@ -1,5 +1,5 @@
 '''
-Runs Strabo web page. Contains the secret key.
+Runs the Strabo web page. Contains the secret key.
 '''
 from strabo import app
 

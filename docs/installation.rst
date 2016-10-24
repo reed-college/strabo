@@ -1,42 +1,38 @@
 Installation Instructions
 =========================
 
-A walk-through of installing dependencies for OSX and Fedora.
+A walk-through for installing dependencies for OSX and Fedora.
 
 Virtualenv
 ----------
 
-If you havn't already, install virtualenv. `Detailed instructions on how to do so <https://github.com/reed-college/2016_sds_lesson_notes/blob/master/lesson_03_beginning_development.markdown>`_
+If you haven't already, install virtualenv. Detailed instructions on how to do so are `here <https://github.com/reed-college/2016_sds_lesson_notes/blob/master/lesson_03_beginning_development.markdown>`_.
 
-Set up virtualenv using python 3
-
-This can be done by::
-
-    mkvirtualenv --python=python3 strabo
+Set up a `strabo` virtualenv using python 3.
+This can be done by typing: ``mkvirtualenv --python=python3 strabo``.
 
 Python packages
 ---------------
 
-pip install -r requirements.txt
+``pip install -r requirements.txt``
 
-
-Fedora Installation Guide
--------------------------
+Fedora Installation Guide ****Clarification needed****
+------------------------------------------------------
 
 Packages needed::
 
-    dnf install libjpeg-devel #allows jpeg files to be uploaded
-    dnf install libpng-devel #allows png files to be uploaded
-    dnf install redhat-rpm-config #needed for python modules to be installed
-    dnf install python3-devel   #needed for python modules to be installed
+    dnf install libjpeg-devel # allows jpeg files to be uploaded
+    dnf install libpng-devel # allows png files to be uploaded
+    dnf install redhat-rpm-config # needed for installation of python modules
+    dnf install python3-devel   # needed for installation of python modules
 
-Install virtualenv and virtualenvwrapper and set up as shown in install.md
-
+Install virtualenv and virtualenvwrapper and set up.
 
 Fedora Postgres installation
 ----------------------------
 
-You will probably have to be in root user for all of this:
+You will probably have to be in root user for all of this.
+
 All taken from `<https://fedoraproject.org/wiki/PostgreSQL#User_Creation_and_Database_Creation>`_::
 
     dnf install postgresql-server postgresql-contrib
@@ -72,6 +68,6 @@ For me, this was at::
 Open this file, scroll down to the actual table and replace ``ident`` or ``peer``
 with ``trust`` on all three rows of the final collumn.
 
-Then restart the service to take account of changes.::
+Then restart the service to take account of changes.:
 
     systemctl restart postgresql

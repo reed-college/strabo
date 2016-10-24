@@ -7,12 +7,10 @@ var def_poly_color = '#2397EB';
 function init_map(){
     /*
     Creates and configures the admin map and adds the interest points to it.
-
     Returns the map.
     */
     var drawMap = make_map('drawMap');
     add_tile_to(drawMap);
-
 
     var all_layers_group = make_all_layers_group(features);
     set_styles(all_layers_group);
@@ -20,13 +18,13 @@ function init_map(){
     all_layers_group.addTo(drawMap);
     return drawMap;
 }
+
 function set_draw_controls(drawMap,drawnItems){
     /*
-    Sets controls which allow one to add a polygon or a point. The control mechanics
-    (options and events) conspire to create an editing enviornment where only
-    one feature can ever be placed on the map in one form. The form control the ensures
-    that at least one feature was placed, so that exactly one feature will be submitted
-    with the interest point, as desired.
+    Sets controls which allow admin to add a polygon or a point. The control mechanics
+    (options and events) allow only one feature to be placed on the map per form.
+    The form control ensures that a feature was placed, so that exactly one feature will be submitted
+    with the interest point.
     */
 
     var addControl = new L.Control.Draw({
@@ -43,7 +41,6 @@ function set_draw_controls(drawMap,drawnItems){
           circle: false,
           rectangle: false
         },
-
 
         edit: {
             featureGroup: drawnItems,
@@ -62,6 +59,7 @@ function set_draw_controls(drawMap,drawnItems){
           }
         }
     });
+
     if(edit_json){
         drawMap.addControl(editControl);
     }
@@ -69,7 +67,7 @@ function set_draw_controls(drawMap,drawnItems){
         drawMap.addControl(addControl);
     }
 
-    drawMap.on('draw:created', function (e) { //grab s layer of drawn item
+    drawMap.on('draw:created', function (e) { //grabs layer of drawn item
         shapeLayer = e.layer;
         shape_drawn = true;
         drawnItems.addLayer(shapeLayer);
@@ -135,7 +133,8 @@ function set_marker_icon(){
         }
     }
 }
-function init_geojson_setter(drawnItems){
+
+function init_geojson_setter(drawnItems){ // ***clarification needed*** ? what does this mean?
     if (edit_json){
         shape_drawn = true;
         shapeLayer = L.geoJson(edit_json).getLayers()[0];
@@ -148,6 +147,7 @@ function init_geojson_setter(drawnItems){
         $('#geojson-field').attr("value", JSONobject);
     });
 }
+
 $(function(){
     var drawMap = init_map();
 

@@ -1,5 +1,5 @@
 '''
-The admin interface has 4 different core features:
+The admin interface has 4 different core features: ***clarification needed*** but you have 5 bullet points???
 
 1. You can view an html table that corresponds directly with the database table. (interest_points_table)
 
@@ -27,26 +27,17 @@ from strabo import app
 from strabo import db
 from strabo import straboconfig
 
-# Landing page allows viewer to select amoung tabs to start editing
+### Landing page
 @app.route("/admin/", methods=["GET"])
 def index():
   return render_template("private/base.html",**straboconfig)
 
-###
-###
-### Views for login page
-###
-###
+### Login page (currently unused)
 @app.route("/login/", methods=["GET"])
 def login():
     return render_template("/public/login.html",**straboconfig)
 
-###
-###
-### Views to upload interest points to db
-###
-###
-
+### Views to edit and upload interest points to db
 @app.route("/admin/edit_ips/")
 def interest_points_table():
     interest_points = db.session.query(schema.InterestPoints).all()
@@ -57,11 +48,11 @@ def interest_points_table():
 @app.route("/admin/edit_ips/redirect")
 def interest_points_redirect():
     '''
-    Is called when "Edit" or "Delete" button is clicked on the /admin/edit_ips table.
+    Called when the "Edit" or "Delete" button is clicked on the /admin/edit_ips table.
 
-    In that html table, the database table id associated with the appropriate edit and delete button.
+    In that html table, the database table id associated with the appropriate edit and delete button. ***clarification needed*** 
 
-    This function figures out which button was clicked, and the id of that button, and
+    This function determines which button was clicked, the id of that button, and
     either deletes the database entry or brings up the editing interface with
     :py:func:`show_ips_upload_form`.
     '''
@@ -73,20 +64,19 @@ def interest_points_redirect():
         database.delete_ip(del_id)
         return redirect(url_for('interest_points_table'))
     else:
-        raise RuntimeError("edit form somehow submitted without delete or edit being pressed")
+        raise RuntimeError("Edit form somehow submitted without delete or edit being pressed")
 
 def show_ips_upload_form(interest_point):
     '''
-    Takes in an row object which can be blank, and does not have to be in the database
-    and processes it so that the upload_ips page renders the form
+    Takes in a row object (which can be blank, and does not have to be in the database)
+    and processes it so that the upload_ips page renders the form ***clarification needed***
     '''
     #Gets all interest points, so that they can be displayed on the leaflet map.
     all_ips = db.session.query(schema.InterestPoints).filter(schema.InterestPoints.id != interest_point.id).all()
     geo_features = [geojson_wrapper.make_other_attributes_properties(ip) for ip in all_ips]
     #gets the geojson object corrsponding to the current interest point so that
-    #the html form contains a default values for the geojson
+    #the html form contains default values for the geojson
     my_ip_json = geojson_wrapper.to_geo_obj(interest_point.geojson_object) if interest_point.id else False
-
     #gets images that the current interest point already owns
     ip_images = private_helper.get_ordered_images(interest_point)
     jsonifiable_ip_images = [utils.concatenate_dicts(database.jsonifiable_row(img),{'month':img.taken_at.month,'year':img.taken_at.year}) for img in ip_images]
@@ -116,7 +106,7 @@ def interest_points_post():
     '''
     Called when interest point form is successfully submitted.
 
-    Stores the interest point data and image data on that form into the database.
+    Stores the interest point and image data on that form in the database.
     '''
     imgs = private_helper.make_ordered_images(
         request.form.getlist('img_id'),

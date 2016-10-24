@@ -119,6 +119,6 @@ function initialize_edit_images(){
 $(document).ready(function(){
     $("#root-add-button").click(function(){
         add_new_after($("#img-start"))
-    }
+    })
     initialize_edit_images();
 });

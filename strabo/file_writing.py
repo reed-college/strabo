@@ -1,6 +1,7 @@
 '''
-This file deals with image file naming, paths, and saving and deleting.
+This file deals with images: paths, file naming, saving, and deleting.
 '''
+
 import werkzeug
 import os
 import random
@@ -12,7 +13,7 @@ from strabo import app
 from strabo import straboconfig
 
 def get_image_path(filename):
-    return os.path.join(straboconfig['UPLOAD_FOLDER'], filename)
+    return os.path.join(straboconfig['UPLOAD_DIR'], filename)
 
 def get_mobile_img_path(filename):
     return os.path.join(straboconfig['MOBILE_IMG_DIR'], filename)
@@ -21,13 +22,13 @@ def get_thumbnail_path(filename):
     return os.path.join(straboconfig['THUMB_DIR'], filename)
 
 def make_unique_filename(path,filename):
-    '''generates a filename with the given properties
+    ''' Generates a filename with the given properties:
 
-    #. The new filename does not exist yet in the folder specified by ``path``.
+    #. The new filename does not exist yet in the folder specified by ``path``. ***clarification needed***
     #. The filename has the same file extension as the ``filename`` argument.
 
-    Note that the uniqueness is only gaurenteed if the app is run in a single thread/process
-    , but it really ought to be fine in any case.
+    Note that the uniqueness is only guaranteed if the app is run in a single thread/process, but it really ought to be 
+    fine in any case. ***clarification needed*** what does that mean
     '''
     def gen_new_name():
         name,ext = os.path.splitext(filename)
@@ -40,12 +41,12 @@ def make_unique_filename(path,filename):
     return uniq_name
 
 def make_filename(form_file_name):
-    '''
-    uses make_unique_filename to make a safe filename that is not the same as any other in the uploads folder
+    ''' ***clarification needed*** why are make_unique_filename and make_filename different functions
+    Uses make_unique_filename to make a safe filename that is not the same as any other in the uploads folder
     '''
     secure_filename = werkzeug.secure_filename(form_file_name)
     # prepend unique id to ensure an unique filename
-    unique_filename = make_unique_filename(straboconfig['UPLOAD_FOLDER'],secure_filename)
+    unique_filename = make_unique_filename(straboconfig['UPLOAD_DIR'],secure_filename)
     return  unique_filename
 
 
@@ -57,20 +58,19 @@ def save_shrunken_images_with(filename):
     in their appropriate directory.
     '''
     image_processing.save_shrunken_image(get_image_path(filename),get_thumbnail_path(filename),straboconfig["THUMBNAIL_MAX_SIZE"])
-    #do the same with different dimensions to mobile_imgs
     image_processing.save_shrunken_image(get_image_path(filename),get_mobile_img_path(filename),straboconfig["MOBILE_SERV_MAX_SIZE"])
 
-
-#saves image and thumbnail using the given filenaem
+# Saves image and thumbnail using the given filename
 def save_image_files(form_file,filename):
     '''
-    Checks saves ``form_file``
+    Checks saves ``form_file`` ***clarification needed*** (what does checks saves form_file mean. why do you call it
+    form_file as opposed to file_ext)
     under ``uploads/<filename>``.
 
     Throws an error if form_file is of not an allowed file extension.
     Ideally, this possibility would be not be allowed through form validation.
     '''
-    #if no files is attached, then do nothing
+    #if no file is attached, then do nothing
     if not form_file:
         return
     #if the file extension is not allowed,throw an error
@@ -84,14 +84,14 @@ def save_image_files(form_file,filename):
     save_shrunken_images_with(filename)
 
 def safe_file_remove(filepath):
-    '''If the file exists, then delete it, else do nothing.'''
+    '''If the file exists, then delete it.'''
     if os.path.isfile(filepath):
         os.remove(filepath)
 
 def delete_image_files(filename):
-    '''
-    Deletes uploaded image and all images generated from it.
-    '''
+    '''Deletes uploaded image and all images generated from it.'''
+
+    # ***clarification needed*** again, why are safe_file_remove and delete_image_files different functions?
     safe_file_remove(get_image_path(filename))
     safe_file_remove(get_thumbnail_path(filename))
     safe_file_remove(get_mobile_img_path(filename))

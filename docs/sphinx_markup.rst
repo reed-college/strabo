@@ -14,7 +14,6 @@ While in the ``strabo/docs/`` folder...
 5. Visit the page on your local server to see the documentation in HTML. The local documentation will be in ``/_build/html/index.html``.
 6. If everything looks right, push your changes to the master branch on GitHub.
 7. Read the Docs should automatically update the documentation. Check it `here <http://strabo.readthedocs.io/en/latest/>`_.
-8. Ta-da!
 
 
 Python
@@ -36,7 +35,7 @@ Example::
         ...
 
 
-Line comments (begun with a #) will not show up on the final Sphinx document. Use these for programmer notes.
+Line comments (beginning with a #) will not show up on the final Sphinx document. Use these for programmer notes.
 
 If a module, class, or function does not show up on the autodocumented page, you can manually include a docstring in the original file. Use this formatting: ::
 

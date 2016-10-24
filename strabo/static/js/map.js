@@ -1,4 +1,3 @@
-
 function set_feature_click(all_layers_group){
     var all_layers = all_layers_group.getLayers();
     all_layers.forEach(function(layer){

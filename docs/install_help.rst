@@ -1,10 +1,7 @@
 Install Help Guide
 ==================
 
-At the bottom is a
-help guide for specific errors. This file is here to deal with
-all the problems of installing and setting up strabo. Please feel free to add any
-solutions to any installation issues you had on your system getting strabo up and running.
+Here is a help guide for specific errors that arise when installing and setting up strabo. Please feel free to add solutions to any installation issues you had when getting strabo up and running.
 
 OSError: cannot decode filename
 -------------------------------
@@ -19,10 +16,10 @@ can be done with brew by::
     brew install libjpeg #ubuntu: apt-get install libjpeg-dev
     pip install  --no-cache-dir -I Pillow
 
-This error occurs when you installed Pillow before the system library as well, or randomly on OSX.
-If the system library is already installed you just need to do steps 1 and 3.
+This error occurs when you installed Pillow before the system library, or randomly on OSX ***clarification needed***.
+If the system library is already installed, you just need to do steps 1 and 3.
 
-On other systems, the process should be very similar, but the
+On other systems the process should be very similar, but the
 specific package and package system will be different.
 
 Other image formats (png?) might also have a similar problem.

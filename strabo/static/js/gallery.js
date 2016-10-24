@@ -1,3 +1,5 @@
+// CURRENTLY UNUSED
+
 var main = function() {
   // Fade image in gallery in or out when user mouses over
   $(".img-responsive").mouseover(function() {
