@@ -42,6 +42,7 @@ def delete_unreferenced_images(old_images,images):
         if all(old_img.id != img.id for img in images):
             delete_image(old_img.id)
 
+
 def jsonifiable_row(sql_row):
     return {col.name:getattr(sql_row,col.name) for col in sql_row.__class__.__table__.columns}
 

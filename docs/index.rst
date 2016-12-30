@@ -10,7 +10,7 @@ Welcome to Strabo Canyon Map's documentation!
 Here you will find documentation for the public and private ends of the Reed Canyon Map project.
 
 .. note::
-	** *This is a work in progress.* **
+    ** *This is a work in progress.* **
 
 Credit Reed College, 2016.
 
@@ -18,15 +18,23 @@ Credit Reed College, 2016.
 Table of Contents
 =================
 .. toctree::
-	:maxdepth: 2
+    :maxdepth: 2
 
-	sphinx_markup
-	setup 
-	config
-	initDB
-	runserver
-	strabo
-	strabo.views
+    installation
+    install_help
+    setup
+    config_guide
+    sphinx_markup
+    editing_workflow
+    concepts
+    config
+    initDB
+    runserver
+    add_database
+    strabo
+    strabo.views
+    javascript
+
 
 
 
@@ -36,4 +44,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-

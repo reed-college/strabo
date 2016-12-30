@@ -1,13 +1,5 @@
-strabo 
+strabo
 ======
-
-add_database.py
----------------
-
-.. automodule:: strabo.add_database
-    :members:
-    :undoc-members:
-    :show-inheritance:
 
 database.py
 -----------
@@ -56,12 +48,6 @@ schema.py
     :members:
     :undoc-members:
     :show-inheritance:
-
-.. autoclass:: IdPrimaryKeyMixin
-   :members: 
-
-.. autoclass:: InterestPoints
-
 
 utils.py
 --------

@@ -1,7 +1,7 @@
 Basic Markup for Sphinx
 =======================
 
-This is a *really* basic summary of how to write documentation using Sphinx. 
+This is a *really* basic summary of how to write documentation using Sphinx.
 
 Workflow
 --------
@@ -12,7 +12,7 @@ While in the ``strabo/docs/`` folder...
 3. Save changes.
 4. Type into terminal: ``make html``. (You can also type ``make clean`` to remove all of the previous _build files and ``make html`` to remake them. This is useful if changes aren't showing up, or if you have deleted a file.)
 5. Visit the page on your local server to see the documentation in HTML. The local documentation will be in ``/_build/html/index.html``.
-6. If everying looks right, push your changes to the master branch on GitHub.
+6. If everything looks right, push your changes to the master branch on GitHub.
 7. Read the Docs should automatically update the documentation. Check it `here <http://strabo.readthedocs.io/en/latest/>`_.
 8. Ta-da!
 
@@ -23,13 +23,20 @@ The Sphinx autodoc extension should find most (if not all) of the Python files a
 
 At the top of each file create a docstring that describes the main function of the file. For example: ::
 
-  """ 
-  This file prints the numbers 1 to 10. 
+  """
+  This file prints the numbers 1 to 10.
   """
 
-You can also write docstrings (enclosed by triple-quotes) at the top of classes or methods. **Docstrings will show up on the final Sphinx document.** 
+You can also write docstrings (enclosed by triple-quotes) at the beginning of classes or methods. **Docstrings will show up on the final Sphinx document.**
 
-Block comments (begun with a #) will not show up on the final Sphinx document. Use these for programmer notes.
+Example::
+
+    def foo():
+        '''this function returns a bar'''
+        ...
+
+
+Line comments (begun with a #) will not show up on the final Sphinx document. Use these for programmer notes.
 
 If a module, class, or function does not show up on the autodocumented page, you can manually include a docstring in the original file. Use this formatting: ::
 
@@ -44,7 +51,7 @@ JavaScript
 ----------
 We will have to manually write the documentation for the JavaScript files.
 
-Follow the Sphinx documentation page for `JavaScript <http://www.sphinx-doc.org/en/stable/domains.html#the-javascript-domain>`_ in order to document functions and classes. Specify that we are using the JavaScript domain by using `js`. 
+Follow the Sphinx documentation page for `JavaScript <http://www.sphinx-doc.org/en/stable/domains.html#the-javascript-domain>`_ in order to document functions and classes. Specify that we are using the JavaScript domain by using `js`.
 
 An example: ::
 

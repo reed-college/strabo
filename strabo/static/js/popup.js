@@ -5,14 +5,6 @@ var gallery;
 //list of image objects passed from post call in ip_clicked
 var imgs;
 
-function hide_popup(){
-    $('.popup').hide();
-    $('.popup-background').hide();
-}
-function show_popup(){
-    $('.popup').show();
-    $('.popup-background').show();
-}
 //calculates thumbnail size from the full size image size passed in
 function get_shrunk_dim(img,max_dim){
     ratio = Math.min($("#carouselholder").width()/img.width,$("#carouselholder").height()/img.height);
@@ -57,22 +49,22 @@ function ip_clicked(db_id) {
             var ip_descrip = data.description;
             var ip_title = data.title;
             if (data.images.length != 0){
-            //renders the popup
-            show_popup();
-            remove_all_carousel_entries();
+                //renders the popup
+                $('#popup').show();
 
-            add_carousel_entries(imgs);
+                remove_all_carousel_entries();
 
-            $("#ip_description").text(ip_descrip);
-            $("#ip_title").text(ip_title);
+                add_carousel_entries(imgs);
 
-            // resize after un-hiding Flickity
-            flkty.resize();
-            flkty.reposition();
-        }
+                $("#ip_description").text(ip_descrip);
+                $("#ip_title").text(ip_title);
+
+                // resize after un-hiding Flickity
+                flkty.resize();
+                flkty.reposition();
+            }
         }
     );
-
 }
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -187,10 +179,13 @@ function set_flickity_img_title(){
         img_desc.innerHTML = img.description;
     })
 }
-
-
-
+function set_popup_close_button(){
+    $("#close-button").click(function(){
+        $("#popup").hide();
+    })
+}
 function flickity_init(){
+    //only call once!
     flkty = new Flickity(document.getElementById("carouselholder"),
         {imagesLoaded: true,
         pageDots:false,
@@ -198,6 +193,7 @@ function flickity_init(){
     );
     set_flickity_img_title();
     set_flickity_click();
+    set_popup_close_button();
 }
 
 
@@ -205,7 +201,7 @@ function flickity_init(){
 
 $(document).keyup(function(e) {
     if (e.keyCode==27) { //if ESC key is hit
-        hide_popup();
+        $("#popup").hide();
         if (gallery){
             gallery.close();
         }
@@ -213,8 +209,8 @@ $(document).keyup(function(e) {
 });
 
 $(document).mouseup(function(e){
-        var popup = $(".popup");
+        var popup = $("#popup");
         if (popup.is(e.target)){
-            hide_popup();
+            $("#popup").hide();
         }
 });

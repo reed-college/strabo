@@ -1,3 +1,6 @@
+'''
+Runs Strabo web page. Contains the secret key.
+'''
 from strabo import app
 
 if __name__ == '__main__':

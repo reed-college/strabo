@@ -12,11 +12,10 @@ $(document).ready(function(){
     var map = make_map('map');
     add_tile_to(map);
 
-    var all_layers_group = L.geoJson(features);
-
     flickity_init();
     map.addControl( new L.Control.Compass() ); //compass feature will not work on devices that do not have a compass
 
+    var all_layers_group = make_all_layers_group(features);
     set_styles(all_layers_group);
     place_overlays_on(all_layers_group,map);
     bind_popups(all_layers_group);
